@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "@fontsource-variable/schibsted-grotesk";
+@import "@fontsource-variable/source-serif-4";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+:root {
+  --paper: #eff1ec;
+  --paper-2: #e6e9e3;
+  --ink: #17201c;
+  --muted: #546059;
+  --line: #c9cfc7;
+  --untrusted: #c93a2e;
+  --model: #d99a06;
+  --checked: #12805f;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101613;
+    --paper-2: #17201c;
+    --ink: #e8ece6;
+    --muted: #94a199;
+    --line: #2b3731;
+    --untrusted: #ff6b5e;
+    --model: #f2b52a;
+    --checked: #3fc79a;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-untrusted: var(--untrusted);
+  --color-model: var(--model);
+  --color-checked: var(--checked);
+  --font-display: "Schibsted Grotesk Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4 Variable", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 3px; }
+::selection { background: var(--model); color: #17201c; }
+
+.packet { transition: transform 0.85s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.node rect, .node text { transition: fill 0.35s, stroke 0.35s; }
+.bar { transform-origin: left; animation: grow 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i) * 70ms); }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .packet, .node rect, .node text { transition: none; }
+  .bar { animation: none; }
+}
